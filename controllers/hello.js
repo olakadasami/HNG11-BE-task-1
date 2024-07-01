@@ -12,10 +12,12 @@ exports.greet = async (req, res) => {
       `${weatherBaseUrl}/current.json?key=${process.env.WEATHER_API_KEY}&q=${clientIp}`
     );
 
+    console.log(weatherInfo);
+
     res.json({
       client_ip: clientIp,
-      location: weatherInfo.location.name,
-      greeting: `Hello, ${visitor}!, the temperature is ${weatherInfo.current.temp_c} degrees Celsius in ${weatherInfo.location.name}`,
+      location: weatherInfo.location.region,
+      greeting: `Hello, ${visitor}!, the temperature is ${weatherInfo.current.temp_c} degrees Celsius in ${weatherInfo.location.region}`,
     });
   } catch (err) {
     res.status(500).json({ error: err.message || "Internal Server Error" });
