@@ -4,11 +4,11 @@ exports.greet = async (req, res) => {
   try {
     const ip =
       req.headers["x-forwarded-for"] || req.socket.remoteAddress || req.ip;
-    console.log(ip);
+    console.log(ip[0]);
 
     // Make request to get weather info
     const weatherRes = await fetch(
-      `${weatherBaseUrl}/current.json?key=${process.env.WEATHER_API_KEY}&q=${ip}`
+      `${weatherBaseUrl}/current.json?key=${process.env.WEATHER_API_KEY}&q=${ip[0]}`
     );
     const weatherInfo = await weatherRes.json();
 
